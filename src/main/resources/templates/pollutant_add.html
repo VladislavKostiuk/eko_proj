@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+    <title>Eco project</title>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo">Eco Project</h2>
+        <div class="header_links_container">
+            <a href="/" class="header_links">Pullution</a>
+            <a href="/pollutant" class="header_links">Pollutant</a>
+            <a href="/object" class="header_links">Object</a>
+        </div>
+    </nav>
+</header>
+
+<section class="main_body">
+    <h2 class="body_header">
+        Pollutant
+    </h2>
+
+    <form th:method="POST" th:action="@{/pollutant/add}" th:object="${pollutant}">
+        <lable for="name">Enter name</lable>
+        <input type="text" th:field="*{name}" id="title"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+        <lable for="gdk">Enter gdk</lable>
+        <input type="text" th:field="*{gdk}" id="gdk"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('gdk')}" th:errors="*{gdk}"></div>
+
+        <lable for="massConsumption">Enter mass consumption</lable>
+        <input type="text" th:field="*{massConsumption}" id="massConsumption"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('massConsumption')}" th:errors="*{massConsumption}"></div>
+
+        <lable for="massConsumption">Enter sf</lable>
+        <input type="text" th:field="*{sf}" id="sf"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('sf')}" th:errors="*{sf}"></div>
+
+        <lable for="massConsumption">Enter rfc</lable>
+        <input type="text" th:field="*{rfc}" id="rfc"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('rfc')}" th:errors="*{rfc}"></div>
+
+        <input class="boddy_button" type="submit" value="Create">
+    </form>
+</section>
+</body>
+</html>

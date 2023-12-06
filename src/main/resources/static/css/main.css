@@ -1,0 +1,147 @@
+header {
+    background-color: #575567;
+    padding: 30px 40px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    text-decoration: none;
+}
+
+.logo {
+    font-size: 30px;
+    color: white;
+    margin-right: 42px;
+}
+
+.header_links {
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    margin-right: 18px;
+}
+
+.header_links:hover {
+    text-decoration: underline;
+}
+
+.main_body {
+    padding: 0px 45px;
+}
+
+.body_header {
+    font-size: 50px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.button_container{
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+    margin: 0 auto;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin-left: 6px;
+    align-items: center;
+}
+
+.boddy_button {
+    cursor: pointer;
+    background-color: #405cf5;
+    border-radius: 6px;
+    border-width: 0;
+    box-shadow: rgba(50, 50, 93, .1) 0 0 0 1px inset,rgba(50, 50, 93, .1) 0 2px 5px 0,rgba(0, 0, 0, .07) 0 1px 1px 0;
+    box-sizing: border-box;
+    color: #fff;
+    font-size: 100%;
+    height: 44px;
+    line-height: 1.15;
+    margin-top: 15px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 25px;
+    text-align: center;
+    transition: all .2s,box-shadow .08s ease-in;
+    width: 240px;
+}
+
+.boddy_button:first-child {
+    padding-top: 12px;
+}
+
+.boddy_button:last-child {
+    margin-right: 6px;
+}
+
+/*.custom-file-upload {
+    border: 1px solid #ccc;
+    display: inline-block;
+    padding: 19px 12px;
+    cursor: pointer;
+    text-align: center;
+    vertical-align: middle;
+}
+
+*/
+/*input[type="file"] {
+    display: none;
+}*/
+
+input[type=file]::file-selector-button {
+  margin-right: 20px;
+  margin-top: 15px;
+  margin-left: 4px;
+  border: none;
+  background: #405cf5;
+  padding: 14px 20px;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  width: 240px;
+}
+
+
+.content-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    border-radius: 5px 5px 0 0;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    width: 100%;
+}
+
+.content-table thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-weight: bold;
+}
+
+.content-table th,
+.content-table td {
+    padding: 12px 15px;
+}
+
+.content-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}

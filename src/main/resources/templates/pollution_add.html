@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+    <title>Eco project</title>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo">Eco Project</h2>
+        <div class="header_links_container">
+            <a href="/" class="header_links">Pullution</a>
+            <a href="/pollutant" class="header_links">Pollutant</a>
+            <a href="/object" class="header_links">Object</a>
+        </div>
+    </nav>
+</header>
+
+<section class="main_body">
+    <h2 class="body_header">
+        Pollution
+    </h2>
+
+<!--    <form th:method="POST" th:action="@{/pollution/add}" th:object="${pollution}">-->
+    <form th:method="POST" th:action="@{/pollution/add}" th:object="${pollutionDTO}">
+<!--        <lable for="object">Choose object</lable>-->
+<!--        <div class="radio_container">-->
+<!--            <p th:each="object: ${allObject}">-->
+<!--                <input type="radio" th:field="*{object}" th:value="${object}"/>-->
+<!--                <span th:text="${object.getName()}"></span>-->
+<!--            </p>-->
+<!--        </div>-->
+
+<!--        <lable for="pollutant">Choose pollutant</lable>-->
+<!--        <div class="radio_container">-->
+<!--            <p th:each="pollutant: ${allPollutant}">-->
+<!--                <input type="radio" th:field="*{pollutant}" th:value="${pollutant}"/>-->
+<!--                <span th:text="${pollutant.getName()}"></span>-->
+<!--            </p>-->
+<!--        </div>-->
+
+        <lable>Choose object</lable>
+        <div class="radio_container">
+            <p th:each="object: ${allObject}">
+                <input type="radio" id="object" th:field="*{objectName}" th:value="${object.getName()}" required/>
+                <span th:text="${object.getName()}"></span>
+            </p>
+        </div>
+        <div style="color: darkred" th:if="${#fields.hasErrors('objectName')}" th:errors="*{objectName}"></div>
+
+        <lable>Choose pollutant</lable>
+        <div class="radio_container">
+            <p th:each="pollutant: ${allPollutant}">
+                <input type="radio" id="pollutant" th:field="*{pollutantName}" th:value="${pollutant.getName()}" required/>
+                <span th:text="${pollutant.getName()}"></span>
+            </p>
+        </div>
+        <div style="color: darkred" th:if="${#fields.hasErrors('pollutantName')}" th:errors="*{pollutantName}"></div>
+
+        <lable for="value">Enter value</lable>
+        <input type="text" th:field="*{value}" id="value"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('value')}" th:errors="*{value}"></div>
+
+        <lable for="year">Enter year</lable>
+        <input type="text" th:field="*{year}" id="year"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
+
+        <lable for="year">Enter concentration</lable>
+        <input type="text" th:field="*{concentration}" id="concentration"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('concentration')}" th:errors="*{concentration}"></div>
+
+        <lable for="year">Enter cr</lable>
+        <input type="text" th:field="*{cr}" id="cr"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('cr')}" th:errors="*{cr}"></div>
+
+        <lable for="year">Enter hq</lable>
+        <input type="text" th:field="*{hq}" id="hq"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('hq')}" th:errors="*{hq}"></div>
+
+        <lable for="year">Enter addLadd</lable>
+        <input type="text" th:field="*{addLadd}" id="addLadd"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('addLadd')}" th:errors="*{addLadd}"></div>
+
+        <lable for="year">Enter compensation</lable>
+        <input type="text" th:field="*{compensation}" id="compensation"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('compensation')}" th:errors="*{compensation}"></div>
+
+        <input class="boddy_button" type="submit" value="Create">
+    </form>
+</section>
+</body>
+</html>

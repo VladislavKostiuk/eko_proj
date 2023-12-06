@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/add.css}">
+<!--    <link rel="stylesheet" href="../static/css/reset.css">-->
+<!--    <link rel="stylesheet" href="../static/css/add.css">-->
+    <title>Eco project</title>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo">Eco Project</h2>
+        <div class="header_links_container">
+            <a href="/" class="header_links">Pullution</a>
+            <a href="/pollutant" class="header_links">Pollutant</a>
+            <a href="/object" class="header_links">Object</a>
+        </div>
+    </nav>
+</header>
+
+<section class="main_body">
+    <h2 class="body_header">
+        Object
+    </h2>
+
+    <form th:method="POST" th:action="@{/object/add}" th:object="${object}">
+        <lable for="name">Enter name</lable>
+        <input type="text" th:field="*{name}" id="title"/>
+        <div style="color: darkred" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+
+        <lable for="name">Enter description</lable>
+        <input type="text" th:field="*{description}" id="description"/>
+
+        <input class="boddy_button" type="submit" value="Create">
+    </form>
+</section>
+</body>
+</html>

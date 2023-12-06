@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" th:href="@{/css/reset.css}">
+	<link rel="stylesheet" th:href="@{/css/main.css}">
+	<title>Eco project</title>
+</head>
+<body>
+	<header>
+		<nav>
+			<h2 class="logo">Eco Project</h2>
+			<div class="header_links_container">
+				<a href="/" class="header_links">Pullution</a>
+				<a href="/pollutant" class="header_links">Pollutant</a>
+				<a href="/object" class="header_links">Object</a>
+			</div>
+		</nav>
+	</header>
+
+	<section class="main_body">
+		<h2 class="body_header">
+			Pollution
+		</h2>
+		<div class="button_container">
+			<a th:href="@{/pollution/add}" class="boddy_button">Add new Pollution</a>
+			<form class = "form" th:method="POST" enctype="multipart/form-data" th:action="@{/pollution/uploadFile}">
+<!--				<label for="file-upload" class="boddy_button">Choose file</label>-->
+				<input name = "file" id="file" type="file"/>
+                <button class="boddy_button" type="submit">
+                    Upload file
+                </button>
+            </form>
+		</div>
+		<table class="content-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Об'єкт</th>
+            <th>Забруднювач</th>
+            <th>Значення викідів (т/рік)</th>
+            <th>Рік</th>
+			<th>Концентрація (мг/м^3)</th>
+			<th>Середня добова доза р-ни (мг/кг)</th>
+			<th>Коф. неканцерогенного ризику (hq)</th>
+			<th>Коф. канцерогенного ризику (cr)</th>
+			<th>Рівень ризику</th>
+			<th>Розмірів відшкодування збитків (грн)</th>
+            <th> </th>
+          </tr>
+        </thead>
+        <tbody>
+			<tr th:each="pollution :${allPollution}">
+				<td th:text="${pollution.getId()}"></td>
+				<td th:text="${pollution.getObject().getName()}"></td>
+				<td th:text="${pollution.getPollutant().getName()}"></td>
+				<td th:text="${pollution.getValue()}"></td>
+				<td th:text="${pollution.getYear()}"></td>
+				<td th:text="${pollution.getConcentration()}"></td>
+				<td th:text="${#numbers.formatDecimal(pollution.getAddLadd(), 1, 8)}"></td>
+				<td th:text="${#numbers.formatDecimal(pollution.getHq(), 1, 8)}"></td>
+				<td th:text="${#numbers.formatDecimal(pollution.getCr(), 1, 8)}"></td>
+				<td th:text="${pollution.getRiskLevel()}"></td>
+				<td th:text="${#numbers.formatDecimal(pollution.getCompensation(), 1, 2)}"></td>
+				<td>
+					<form th:action="@{/pollution/delete/{id}(id=${pollution.getId()})}" method="post">
+						<button type="submit">Delete</button>
+					</form>
+				</td>
+			</tr>
+        </tbody>
+      </table>
+	</section>
+</body>
+</html>

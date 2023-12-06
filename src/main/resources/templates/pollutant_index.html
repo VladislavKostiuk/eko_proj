@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/reset.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <title>Eco project</title>
+</head>
+<body>
+<header>
+    <nav>
+        <h2 class="logo">Eco Project</h2>
+        <div class="header_links_container">
+            <a href="/" class="header_links">Pullution</a>
+            <a href="/pollutant" class="header_links">Pollutant</a>
+            <a href="/object" class="header_links">Object</a>
+        </div>
+    </nav>
+</header>
+
+<section class="main_body">
+    <h2 class="body_header">
+        Pollutant
+    </h2>
+    <div class="button_container">
+        <a th:href="@{/pollutant/add}" class="boddy_button">Add new Pollutant</a>
+        <form class = "form" th:method="POST" enctype="multipart/form-data" th:action="@{/pollutant/uploadFile}">
+<!--            <label for="file-upload" class="boddy_button">Choose file</label>-->
+            <input name = "file" id="file" type="file"/>
+            <button class="boddy_button" type="submit">
+                Upload file
+            </button>
+        </form>
+    </div>
+    <table class="content-table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Забрднювач</th>
+            <th>Гранич. допуст. концентрація (мг/м^3)</th>
+            <th>Величина мас. витрати (г/год)</th>
+            <th>Фактор нахилу (sf)</th>
+            <th>Референтна концентрація (rfc)</th>
+            <th> </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tbody>
+        <tr th:each="pollutant :${allPollutant}">
+            <td th:text="${pollutant.getId()}"></td>
+            <td th:text="${pollutant.getName()}"></td>
+            <td th:text="${pollutant.getGdk()}"></td>
+            <td th:text="${pollutant.getMassConsumption()}"></td>
+            <td th:text="${pollutant.getSf()}"></td>
+            <td th:text="${pollutant.getRfc()}"></td>
+            <td>
+                <form th:action="@{/pollutant/delete/{id}(id=${pollutant.getId()})}" method="post">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+        </tbody>
+    </table>
+</section>
+</body>
+</html>
