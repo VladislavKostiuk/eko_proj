@@ -1,10 +1,13 @@
 package com.example.service;
 
+import com.example.constants.TaxRates;
 import com.example.model.Pollutant;
 import com.example.model.Pollution;
+import com.example.model.Tax;
 import com.example.repository.ObjectRepository;
 import com.example.repository.PollutantRepository;
 import com.example.repository.PollutionRepository;
+import com.example.repository.TaxRepository;
 import lombok.AllArgsConstructor;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -25,6 +28,7 @@ public class ExcelReader {
     private final ObjectRepository objectRepository;
     private final PollutantRepository pollutantRepository;
     private final PollutionRepository pollutionRepository;
+    private final TaxRepository taxRepository;
 
     public void readObjectData(String fileName) {
         objectRepository.deleteAll();
@@ -70,12 +74,21 @@ public class ExcelReader {
                 Cell massConsumptionCell = row.getCell(3);
                 Cell sfCell = row.getCell(4);
                 Cell rfcCell = row.getCell(5);
+                Cell dangerLevelCell = row.getCell(6);
+                Cell taxRateCell = row.getCell(7);
+
+                double taxRate = taxRateCell.getNumericCellValue();
+                int dangerLevel = (int) dangerLevelCell.getNumericCellValue();
+                taxRate = getTaxRate(taxRate, dangerLevel);
+
                 Pollutant pollutant = new Pollutant(
                         nameCell.getStringCellValue(),
                         (int) gdkCell.getNumericCellValue(),
                         (int) massConsumptionCell.getNumericCellValue(),
                         sfCell.getNumericCellValue(),
-                        rfcCell.getNumericCellValue()
+                        rfcCell.getNumericCellValue(),
+                        dangerLevel,
+                        taxRate
                 );
                 pollutantRepository.save(pollutant);
             }
@@ -135,9 +148,36 @@ public class ExcelReader {
                         riskLevel
                 );
                 pollutionRepository.save(pollution);
+
+                double taxSumm = CalculationService.calcTax(pollutionValue, pollutant.getTaxRate());
+
+                Tax tax = new Tax(
+                        object,
+                        pollution,
+                        pollutant.getDangerLevel(),
+                        pollutant.getTaxRate(),
+                        taxSumm
+                );
+                taxRepository.save(tax);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private double getTaxRate(double tax_rate, int danger_level){
+        if(tax_rate != 0){
+            return tax_rate;
+        }
+
+        if (danger_level == 1) {
+            return TaxRates.FirstDangerLevelTaxRate;
+        } else if (danger_level == 2) {
+            return TaxRates.SecondDangerLevelTaxRate;
+        } else if (danger_level == 3) {
+            return TaxRates.ThirdDangerLevelTaxRate;
+        } else  {
+            return TaxRates.FourthDangerLevelTaxRate;
         }
     }
 }

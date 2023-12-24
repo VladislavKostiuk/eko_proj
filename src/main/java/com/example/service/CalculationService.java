@@ -1,5 +1,7 @@
 package com.example.service;
 
+import com.example.constants.TaxRates;
+
 public class CalculationService {
     private static final double BW = 60;
     private static final double daysInYear = 365;
@@ -44,5 +46,9 @@ public class CalculationService {
 
     private static double getPollutionMass(double pv, double mfr, double t) {
         return 3.6 * Math.pow(10, -3) * (pv - mfr) * t;
+    }
+
+    public static double calcTax(double pollutionValue, double taxRate){
+        return pollutionValue * taxRate;
     }
 }

@@ -37,11 +37,19 @@ public class Pollutant {
     @Min(value = 0, message = "Rfc should not be less than 0")
     private double rfc;
 
-    public Pollutant(String name, int gdk, int massConsumption, double sf, double rfc) {
+    @Column(name = "danger_level")
+    private int dangerLevel;
+
+    @Column(name = "tax_rate")
+    private double taxRate;
+
+    public Pollutant(String name, int gdk, int massConsumption, double sf, double rfc, int dangerLevel, double taxRate) {
         this.name = name;
         this.gdk = gdk;
         this.massConsumption = massConsumption;
         this.sf = sf;
         this.rfc = rfc;
+        this.dangerLevel = dangerLevel;
+        this.taxRate = taxRate;
     }
 }

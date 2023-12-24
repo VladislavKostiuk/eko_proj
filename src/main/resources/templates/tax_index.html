@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta lang="en">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" th:href="@{/css/reset.css}">
+  <link rel="stylesheet" th:href="@{/css/main.css}">
+  <title>Eco project</title>
+</head>
+<body>
+<header>
+  <nav>
+    <h2 class="logo">Eco Project</h2>
+    <div class="header_links_container">
+      <a href="/" class="header_links">Pullution</a>
+      <a href="/pollutant" class="header_links">Pollutant</a>
+      <a href="/object" class="header_links">Object</a>
+      <a href="/tax" class="header_links">Tax</a>
+    </div>
+  </nav>
+</header>
+
+<section class="main_body">
+  <h2 class="body_header">
+    Tax
+  </h2>
+  <table class="content-table">
+    <thead>
+    <tr>
+      <th>Id</th>
+      <th>Назва об'єкту</th>
+      <th>Назва забруднюючої р-ни</th>
+      <th>Значення викідів (т/рік)</th>
+      <th>Рік</th>
+      <th>Рівень небезпеки</th>
+      <th>Ставки податку за викиди (грн/тон)</th>
+      <th>Сума податку за викиди в повітря (грн)</th>
+      <th> </th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tax :${allTaxes}">
+      <td th:text="${tax.getId()}"></td>
+      <td th:text="${tax.getObject().getName()}"></td>
+      <td th:text="${tax.getPollution().getPollutant().getName()}"></td>
+      <td th:text="${tax.getPollution().getValue()}"></td>
+      <td th:text="${tax.getPollution().getYear()}"></td>
+      <td th:text="${tax.getDangerLevel()}"></td>
+      <td th:text="${tax.getRate()}"></td>
+      <td th:text="${#numbers.formatDecimal(tax.getTax(), 1, 2)}"></td>
+      <td>
+        <form th:action="@{/tax/delete/{id}(id=${tax.getId()})}" method="post">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+</body>
+</html>

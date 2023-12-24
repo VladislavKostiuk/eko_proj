@@ -16,6 +16,7 @@
             <a href="/" class="header_links">Pullution</a>
             <a href="/pollutant" class="header_links">Pollutant</a>
             <a href="/object" class="header_links">Object</a>
+            <a href="/tax" class="header_links">Tax</a>
         </div>
     </nav>
 </header>
@@ -43,6 +44,8 @@
             <th>Величина мас. витрати (г/год)</th>
             <th>Фактор нахилу (sf)</th>
             <th>Референтна концентрація (rfc)</th>
+            <th>Рівень небезпеки</th>
+            <th>Ставка податку (грн/тон)</th>
             <th> </th>
         </tr>
         </thead>
@@ -55,6 +58,8 @@
             <td th:text="${pollutant.getMassConsumption()}"></td>
             <td th:text="${pollutant.getSf()}"></td>
             <td th:text="${pollutant.getRfc()}"></td>
+            <td th:text="${pollutant.getDangerLevel()}"></td>
+            <td th:text="${pollutant.getTaxRate()}"></td>
             <td>
                 <form th:action="@{/pollutant/delete/{id}(id=${pollutant.getId()})}" method="post">
                     <button type="submit">Delete</button>
